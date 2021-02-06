@@ -1,5 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
+:root {
+  --style-color: #3171d6;
+}
+
+@keyframes fadeInOpacity {
+  0% { opacity: 0 ;} 
+  100% { opacity: 1; }
+}
+
+@keyframes fadeInOpacity2 {
+  0% { opacity: 0 ;} 
+  100% { opacity: 0.5; }
+}
+
+@keyframes slideUp {
+  0% { transform: translate(0px,0px) ;} 
+  100% { transform: translate(0px, -44vh); }
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -7,16 +26,17 @@
 }
 
 body {
-  background-color: white;
-  color: black;
+  background-color: var(--style-color);
+  color: white;
   font-family: "Roboto", sans-serif;
   display: flex;
   justify-content: center;
 }
 
 .board {
-  border: 1rem solid black;
-  background: black;
+  border: 1rem solid;
+  border-radius: 1rem;
+  background: white;
   width: 500px;
   height: 500px;
   display: grid;
@@ -25,6 +45,76 @@ body {
 }
 
 .squares {
+  border-radius: 0.5rem;
+  background-color: var(--style-color);
   border: none;
   font-size: 5rem;
+  cursor: pointer;
+  outline: none;
+}
+
+.chosenSquare {
+  color: white;
+  opacity: 1;
+  animation-name: fadeInOpacity;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: 0.5s;
+}
+
+.info-wrapper {
+  margin: 0.5rem;
+  font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.info-wrapper button {
+  font-size: 1rem;
+  border-radius: 1.25rem;
+  padding: 0.5rem;
+  background-color: white;
+  color: var(--style-color);
+  border: 0;
+}
+
+.info-wrapper button:hover {
+  background: #bfbfbf;
+}
+
+.winBanner {
+  padding: 1rem;
+  background-color: #7A9E7E; 
+  color: white;
+  border-radius: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  margin: auto;
+  justify-content: space-evenly;
+  align-items: center;
+  animation-name: fadeInOpacity, slideUp;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: 0.5s;
+  animation-fill-mode:forwards;
+}
+
+.winBanner button {
+  font-size: 1rem;
+  border-radius: 1.25rem;
+  padding: 0.5rem;
+  border: 0;
+  background-color: var(--style-color);
+  color: white;
+}
+
+.winBanner button:hover {
+  background: #bfbfbf;
+}
+
+.winBanner h1 {
+  padding: 1rem;
+  margin-bottom: 1rem;
 }

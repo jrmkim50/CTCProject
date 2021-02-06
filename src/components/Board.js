@@ -1,9 +1,12 @@
 import React from "react";
 import Square from "./Square";
 
-const Board = (/* { parameters } */) => (
-  // TODO: Populate the board with squares
-  <></>
+const Board = ({ squares, onClick }) => (
+  <div className="board">
+    {squares.map((square, index) => (
+      <Square value = {square} onClick = {() => onClick(index)} key={index} className={square ? "chosenSquare": ""} />
+    )) }
+  </div>
 );
 
 export default Board;

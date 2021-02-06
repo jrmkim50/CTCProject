@@ -3,13 +3,52 @@ import { calculateWinner } from "../calculate_win";
 import Board from "./Board";
 
 const Game = () => {
-  // TODO: Set up states and functions: position of Xs and Os on board,
-  // step number, whether X is next, is there a win or tie, etc.
+  const [board, setBoard] = useState([null,null,null,null,null,null,null,null,null]);
+  const [stepNumber, setStepNumber] = useState(0);
+  const [xIsNext, setXisNext] = useState(true);
+  let winner = calculateWinner(board);
+  let nextString = xIsNext ? "X" : "O";
 
+  const handleClick = (i) => {
+    if (!winner && !board[i]) {
+      let oldBoard = [...board];
+      oldBoard[i] = nextString;
+      setBoard(oldBoard);
+      setStepNumber(stepNumber + 1);
+      setXisNext(!xIsNext);
+    }
+  }
+
+  const jumpToStart = () => {
+    setBoard([null,null,null,null,null,null,null,null,null]);
+    setStepNumber(0);
+    setXisNext(true);
+  }
+
+  const result = () => {
+    if (!winner) {
+      return `Next player: ${nextString}`;
+    } else {
+      return `${winner}`;
+    }
+  }
+  
   return (
     <>
-      TODO: Render the board here along with the title, game status,
-      and 'Go to Start' button.
+      <h1>Tic Tac Toe</h1>
+      <Board squares={board} onClick={handleClick}/>
+      <div className='info-wrapper'>
+        <div>
+          <button onClick={jumpToStart}>Go to Start</button>
+        </div>
+        <h3>{ result() }</h3>
+      </div>
+      <div>
+        {winner ? (<div className="winBanner">
+          <h1>{winner}</h1>
+          <button onClick={() => {jumpToStart()}}>Play again?</button>
+        </div>) : null}
+      </div>
     </>
   );
 };
